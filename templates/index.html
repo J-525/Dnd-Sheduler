@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>D&D Schedule Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Uncial+Antiqua&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dnd-theme.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎲 D&D Schedule Manager</h1>
+            <div class="header-controls">
+                <select id="days-select">
+                    <option value="5">Next 5 Days</option>
+                    <option value="7">Next 7 Days</option>
+                    <option value="14" selected>Next 14 Days</option>
+                    <option value="30">Next 30 Days</option>
+                </select>
+                <button id="refresh-btn" class="btn btn-primary">⚔️ Refresh</button>
+            </div>
+        </header>
+
+        <div id="loading" class="loading">Loading schedule...</div>
+        
+        <div id="schedule-container" style="display: none;">
+            <table id="schedule-table" class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        {% for player in players %}
+                        <th>{{ player }}</th>
+                        {% endfor %}
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const PLAYERS = {{ players | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

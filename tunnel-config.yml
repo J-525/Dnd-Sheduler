@@ -1,0 +1,11 @@
+# Cloudflared Tunnel Configuration
+# For use with named tunnels
+
+# HTTP/2 protocol for better performance
+protocol: http2
+
+ingress:
+  - service: http://localhost:5000
+  
+# Additional settings
+no-autoupdate: false
